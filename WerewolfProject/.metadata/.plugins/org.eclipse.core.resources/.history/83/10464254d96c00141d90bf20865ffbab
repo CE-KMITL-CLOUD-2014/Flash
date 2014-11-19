@@ -1,0 +1,46 @@
+package service;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import JDBC.JDBCdataRoom;;
+@RestController
+@RequestMapping("/room")
+public class JoinRoomController {
+	
+	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	public JSONObject getCreate(@RequestParam("username") String username){
+		JDBCdataRoom jdbcDateRoom = new JDBCdataRoom();
+		JSONObject json= new JSONObject();
+		int idRoom = jdbcDateRoom.insertRoom(username);
+		try {
+			json.put("idRoom", idRoom);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return json;
+	} 
+	
+	@RequestMapping(value = "/join", method = RequestMethod.GET)
+	public JSONObject getJoin(@RequestParam("username") String username,
+			@RequestParam("idRoom") int idRoom){
+		JDBCdataRoom jdbcDateRoom = new JDBCdataRoom();
+		JSONObject json= new JSONObject();
+		JDBCdataRoom jdbcDateRoom = new JDBCdataRoom();
+		int returnIdRoom = jdbcDateRoom.updatePlayer(username,idRoom);
+		try {
+			json.put("idRoom", idRoom1);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return json;
+	} 
+}
+
+

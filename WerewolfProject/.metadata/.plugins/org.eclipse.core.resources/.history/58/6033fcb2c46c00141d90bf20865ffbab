@@ -1,0 +1,5 @@
+package com.werewolf.werewolfService.Model;
+
+public class Player {
+	
+}

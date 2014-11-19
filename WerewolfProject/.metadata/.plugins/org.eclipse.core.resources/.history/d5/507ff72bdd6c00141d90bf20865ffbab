@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8 "/>
+	<title>Werewolf-Lobby</title>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+</head>
+<body>
+
+	<label></label>
+	<form class="form-top" role="form">
+		<div class="container-fluid">
+		 <div class="row">
+		  <div class="col-md-1 col-sm-2 col-xs-2">
+		  	<img src="game.png">
+		  </div>
+		  <div class="col-md-9 col-sm-7 col-xs-7">
+
+			<ul class="nav nav-pills">
+			  <li class="active"><a href="#lobby" role="tab" data-toggle="tab">Lobby</a></li>
+			  <li><a href="#profile" role="tab" data-toggle="tab">Profile</a></li>
+			  <li><a href="#round" role="tab" data-toggle="tab">Round</a></li>
+
+			  <!-- Log out -->
+			  <form action="home.html" class="form" id="logout" method="post">
+			  <div class="col-md-3 col-sm-3 col-xs-1">
+		  		<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-cog"></span>Logout</button>
+		  	  </div>
+		  	  </form>
+			</ul>
+ 			
+ 			
+
+		  	</div>
+			</div>
+
+			<div class="tab-content">
+
+
+			<!-- lobby -->
+			  <div class="tab-pane active" id="lobby">
+			 <!--nav -->
+				<label></label>
+				<label></label>
+
+				<form class="form-join" role="form">
+				
+					<div class="container-fluid">
+						<div class="col-md-12 col-sm-12">
+							
+							<ul class="nav nav-tabs" role="tablist">
+							  <li class="active"><a href="#join" role="tab" data-toggle="tab">Join game</a></li>
+							  <li><a href="#create" role="tab" data-toggle="tab">Create game</a></li>
+							</ul>
+
+							<!-- Tab panes -->
+							<div class="tab-content">
+
+							<!-- join game -->
+							  <div class="tab-pane active" id="join">
+							  	<div class="col-md-6 col-sm-6 col-xs-9">
+					  				<label></label>
+					  		  			
+					  					<div class="alert alert-info" role="alert">Game room</div>
+					  		  			
+					  				</div>
+							  </div>
+
+							  <!-- create game -->
+							  <div class="tab-pane" id="create">
+							  	<div class="col-md-6 col-sm-6 col-xs-9 col-md-offset2">
+					  				<label></label>
+					  		  			<div class="container-fluid">
+					  						<button type="button" class="btn btn-primary">Create room <span class="glyphicon glyphicon-hand-left"></span></button>
+					  		 			</div>
+					  				</div>
+							  </div>
+
+							</div>
+
+				   		</div>
+				  	</div>
+
+				</form>
+			  </div>
+
+
+			 <!-- profile -->
+			  <div class="tab-pane" id="profile">
+			  	<label></label>
+				<label></label>
+				<form class="form-join" role="form">
+				  <div class="container-fluid">
+				   <div class="col-md-12 col-sm-12">
+					<ul class="nav nav-tabs" role="tablist">
+				  	<li class="active"><a href="#">Profile Player</a></li>
+				  	</ul>
+				  		<div class="col-md-6 col-sm-6 col-xs-9">
+				  		<label></label>
+				  		  <div class="container-fluid">
+				  			
+				  		  </div>
+				  		</div>
+				   </div>
+				  </div>
+				</form>
+			  </div>
+
+
+			 <!-- round -->
+			  <div class="tab-pane" id="round">
+			  	<label></label>
+				<label></label>
+				<form class="form-round" role="form">
+				  <div class="container-fluid">
+				   <div class="col-md-12 col-sm-12">
+					<ul class="nav nav-tabs" role="tablist">
+				  	<li class="active"><a href="#">Round</a></li>
+				  	</ul>
+				  		<div class="col-md-6 col-sm-6 col-xs-9">
+				  		<label></label>
+				  		  <div class="container-fluid">
+				  			<p class="bg-primary">Scoreboard</p>
+				  		  </div>
+				  		</div>
+				   </div>
+				  </div>
+				</form>
+			  </div>
+			  
+
+			</div>
+
+		 
+		</div>
+	</form>
+
+
+
+</body>
+</html>

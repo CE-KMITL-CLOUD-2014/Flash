@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8 " />
+<title>Werewolf-Home</title>
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+
+</head>
+<body>
+	<label></label>
+	<form class="form-top" role="form">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-2 col-sm-3 col-xs-6">
+					<img src="Werewolf.png">
+				</div>
+				<div class="col-md-4 col-sm-6 col-xs-2">
+					<ul class="nav nav-pills">
+						<li class="active"><a href="#">Home</a></li>
+
+					</ul>
+				</div>
+			</div>
+		</div>
+	</form>
+
+	<!-- login -->
+	<div>
+		<div>
+			<label></label>
+			<div class="container-fluid">
+				<div class="col-md-3 col-sm-4 col-xs-6">
+					<p class="bg-primary">Log in to play werewolf game</p>
+				</div>
+			</div>
+
+			<div class="container-fluid">
+				<div class="col-md-3 col-sm-4 col-xs-6">
+					<input type="username" class="form-control" name="UsernameLogin"
+						id="Username" placeholder="Username">
+				</div>
+			</div>
+			<div class="container-fluid">
+				<div class="col-md-3 col-sm-4 col-xs-6">
+					<input type="password" class="form-control" name="PasswordLogin"
+						id="Password" placeholder="Password">
+				</div>
+			</div>
+			<div></div>
+			<div class="container-fluid">
+				<div class="col-md-offset-0 col-sm-10">
+					<button class="btn btn-default" onclick="login()">Sign in</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+		<!-- create username -->
+		<label></label>
+		<div>
+			<label></label>
+			<div class="container-fluid">
+				<div class="col-md-3 col-sm-4 col-xs-6">
+					<p class="bg-primary">Create username for free</p>
+				</div>
+			</div>
+
+			<div class="container-fluid">
+				<div class="col-md-3 col-sm-4 col-xs-6">
+					<input type="username" class="form-control" name="UsernameCreate"
+						id="inputUsername" placeholder="Pick a username">
+				</div>
+			</div>
+			<div class="container-fluid">
+				<div class="col-md-3 col-sm-4 col-xs-6">
+					<input type="password" class="form-control" name="PasswordCreate"
+						id="inputPassword" placeholder="Create a password">
+				</div>
+			</div>
+			<div></div>
+			<div class="container-fluid">
+				<div class="col-md-offset-0 col-sm-10">
+					<button  class="btn btn-default" onclick="create()">Create</button>
+				</div>
+			</div>
+		</div>
+</body>
+
+<script>
+	function login(){
+		if((document.getElementById("Username").value != "") && (document.getElementById("Password").value != "")){
+			var myUsername = document.getElementById("Username").value;
+			var request = $.ajax({
+				  url: "service/member/login",
+				  type: "POST",
+				  data: {username : myUsername,
+					  	 pass     :document.getElementById("Password").value },
+				  datatype : "json",
+				});
+				 
+				request.done(function( msg ) {
+					var obj = JSON.parse(msg);
+					
+					if (obj.isFouldID == true && obj.isTruePassword == true) {
+						localStorage.username = myUsername;
+	 		 			alert( "Wellcome to werewolf game :)" );
+	 		 			window.location = obj.url;
+
+	 		 		} else{
+	 		 			alert("Invalid username or password. Please re-enter your Username and Password");
+	 		 			window.location = obj.url;
+				}});
+				 
+				request.fail(function( jqXHR, textStatus ) {
+				  alert( "Request failed: " + textStatus );
+				});
+				
+		}
+		else{
+			alert("Invalid username or password. Please re-enter your Username and Password");
+			window.location = "home.html";
+		}
+		
+	}
+
+	function create(){
+		if((document.getElementById("inputUsername").value != "") && (document.getElementById("inputPassword").value != "")){
+			var request = $.ajax({
+				  url: "service/member/register",
+				  type: "POST",
+				  data: {username :document.getElementById("inputUsername").value ,
+					  	 pass     :document.getElementById("inputPassword").value },
+				  datatype : "json",
+				});
+				 
+				request.done(function( msg ) {
+					alert(msg);
+					var obj = JSON.parse(msg);
+					
+					if (obj.isSuccess == true) {
+	 		 			alert( "Username: " + document.getElementById("inputUsername").value + "\nPassword: " + document.getElementById("inputPassword").value );
+
+	 		 		} else{
+	 		 			alert("Please re-enter new Username ");
+				}});
+				 
+				request.fail(function( jqXHR, textStatus ) {
+				  alert( "Request failed: " + textStatus );
+				});
+
+		}
+		else{
+			alert("Invalid username or password. Please re-enter your Username and Password");
+			window.location = "home.html";
+		}
+
+	}
+
+
+	</script>
+
+</html>

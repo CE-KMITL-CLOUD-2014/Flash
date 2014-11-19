@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8 "/>
+	<title>Werewolf-Lobby</title>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+	<script>
+		$(document).load.ready(function({
+
+		}));
+	</script>
+</head>
+<style>
+
+#game_room{
+	background-color: #DCDCDC ;
+	height: 450px;
+
+	
+}
+
+</style>
+
+<body>
+
+	<label></label>
+	<div class="form-top">
+		<div class="container-fluid">
+		 <div class="row">
+		  <div class="col-md-1 col-sm-2 col-xs-2">
+		  	<img src="game.png">
+		  </div>
+		  <div class="col-md-9 col-sm-7 col-xs-7">
+
+			<ul class="nav nav-pills">
+			  <li class="active"><a href="#lobby" role="tab" data-toggle="tab">Lobby</a></li>
+			  <li><a href="#profile" role="tab" data-toggle="tab">Profile</a></li>
+			  <li><a href="#round" role="tab" data-toggle="tab">Round</a></li>
+
+			  <!-- Log out -->
+			  <form class="form" id="logout" action="home.html">
+
+			  <div class="col-md-3 col-sm-3 col-xs-1">
+		  		<button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-cog"></span>Logout</button>
+		  	  </div>
+		  	  </form>
+			</ul>
+ 			
+ 			
+
+		  	</div>
+			</div>
+
+			<div class="tab-content">
+
+
+			<!-- lobby -->
+			  <div class="tab-pane active" id="lobby">
+			 <!--nav -->
+				<label></label>
+				<label></label>
+
+					<div class="container-fluid">
+						<div class="col-md-12 col-sm-12">
+							
+							<ul class="nav nav-tabs" role="tablist">
+							  <li class="active"><a href="#join" role="tab" data-toggle="tab">Join game</a></li>
+							  <li><a href="#create" role="tab" data-toggle="tab">Create game</a></li>
+							</ul>
+
+							<!-- Tab panes -->
+							<div class="tab-content">
+
+							<!-- join game -->
+							  <div class="tab-pane active" id="join">
+							  	<div>
+							  		<h4><span class="label label-primary">Game room</span></h4>
+							  	</div>
+
+							  	<div class="col-md-7 col-sm-6 col-xs-9">
+					  		  		<div class="jumbotron" id="game_room" style="overflow-y: scroll;">
+					  					
+					  		  		</div>
+
+					  			</div>
+							  </div>
+
+							  <!-- create game -->
+							  
+							  <div class="tab-pane" id="create">
+							  	<div class="col-md-6 col-sm-6 col-xs-9 col-md-offset2">
+					  				<label></label>
+					  					<form class="form" action="game.html">
+					  		  			<div class="container-fluid">
+					  						<button type="submit" class="btn btn-primary">Create room <span class="glyphicon glyphicon-hand-left"></span></button>
+					  		 			</div>
+					  		 			</form>
+					  			</div>
+							  </div>
+							  
+
+							</div>
+
+				   		</div>
+				  	</div>
+
+				
+			  </div>
+
+
+			 <!-- profile -->
+			  <div class="tab-pane" id="profile">
+			  	<label></label>
+				<label></label>
+				<form class="form-join" role="form">
+				  <div class="container-fluid">
+				   <div class="col-md-12 col-sm-12">
+					<ul class="nav nav-tabs" role="tablist">
+				  	<li class="active"><a href="#">Profile Player</a></li>
+				  	</ul>
+				  		<div class="col-md-6 col-sm-6 col-xs-9">
+				  		<label></label>
+				  		  <div class="container-fluid">
+				  			
+				  		  </div>
+				  		</div>
+				   </div>
+				  </div>
+				</form>
+			  </div>
+
+
+			 <!-- round -->
+			  <div class="tab-pane" id="round">
+			  	<label></label>
+				<label></label>
+				<form class="form-round" role="form">
+				  <div class="container-fluid">
+				   <div class="col-md-12 col-sm-12">
+					<ul class="nav nav-tabs" role="tablist">
+				  	<li class="active"><a href="#">Round</a></li>
+				  	</ul>
+				  		<div class="col-md-6 col-sm-6 col-xs-9">
+				  		<label></label>
+				  		  <div class="container-fluid">
+				  			<p class="bg-primary">Scoreboard</p>
+				  		  </div>
+				  		</div>
+				   </div>
+				  </div>
+				</form>
+			  </div>
+			  
+
+			</div>
+
+		 
+		</div>
+	</div>
+
+
+
+</body>
+</html>

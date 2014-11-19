@@ -1,0 +1,66 @@
+<html>
+<head>
+	<title>Example</title>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.css"></script>
+</head>
+<body>
+	<div class = "container-fluid">
+		<div class = "row">
+			<div class="panel panel-info">
+				<div class = "panel-heading">HEADING</div>
+				<div class - "panel-body">
+					<div class = "col-md-6 col-xs-6 ">
+						<img src="mao43.png">
+					</div>
+		
+					<div class = "col-md-6 col-xs-6 ">
+			
+						Name : Wikrom <br>
+						Surname : Phuchan <br>
+						Age : 21 <br>
+						Like : Money <br>
+						Hate : Wake up early <br>		
+	
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+		<div>
+			<table border="5">
+				<form>
+					<tr>
+						<td width="200">Name</td>
+						<td><input type="text" class = "form-control" name="name"></td>
+					</tr>
+					<tr>
+						<td>Comment</td>
+						<td><input type="text" name="comment"></td>
+					</tr>				
+					<tr>
+						<td>feeling</td>
+						<td>
+							<input type="radio" name="feeling">Like <br>
+							<input type="radio" name="feeling">Hate <br>
+							<input type="radio" name="feeling">Go to Hell <br>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Submit:
+						</td>
+						<td>
+							<input type="submit">
+						</td>
+					</tr>
+				</form>
+			</table>
+		</div>
+		<div>
+			comment...
+		</div>
+	</div>
+</body>
+</html>

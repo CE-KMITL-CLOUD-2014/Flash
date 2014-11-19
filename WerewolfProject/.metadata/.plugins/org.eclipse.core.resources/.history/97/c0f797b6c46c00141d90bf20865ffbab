@@ -1,0 +1,8 @@
+package com.werewolf.werewolfService.Model;
+
+public class PlayGame {
+	private Career career;
+	public boolean isWin(){
+		return true;
+	}
+}

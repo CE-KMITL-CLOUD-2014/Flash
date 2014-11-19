@@ -1,0 +1,257 @@
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8 "/>
+	<title>Werewolf-Lobby</title>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+	<script>
+
+	</script>
+</head>
+<style>
+
+#game_room{
+	background-color: #DCDCDC ;
+	height: 450px;
+
+	
+}
+
+
+</style>
+
+<body>
+
+	<label></label>
+	<div class="form-top">
+		<div class="container-fluid">
+		 <div class="row">
+		  <div class="col-md-1 col-sm-2 col-xs-2">
+		  	<img src="game.png">
+		  </div>
+		  <div class="col-md-9 col-sm-7 col-xs-7">
+
+			<ul class="nav nav-pills">
+			  <li class="active"><a href="#lobby" role="tab" data-toggle="tab">Lobby</a></li>
+			  <li><a href="#profile" role="tab" data-toggle="tab">Profile</a></li>
+			  <li><a href="#round" role="tab" data-toggle="tab">Round</a></li>
+
+			  <!-- Log out -->
+			  <form class="form" id="logout" action="home.html">
+
+			  <div class="col-md-3 col-sm-3 col-xs-1">
+		  		<button class="btn btn-default"><span class="glyphicon glyphicon-cog" onclick("logout()")></span>Logout</button>
+		  	  </div>
+		  	  </form>
+			</ul>
+ 			
+ 			
+
+		  	</div>
+			</div>
+
+			<div class="tab-content">
+
+
+			<!-- lobby -->
+			  <div class="tab-pane active" id="lobby">
+			 <!--nav -->
+				<label></label>
+				<label></label>
+
+					<div class="container-fluid">
+						<div class="col-md-12 col-sm-12">
+							
+							<ul class="nav nav-tabs" role="tablist">
+							  <li class="active"><a href="#join" role="tab" data-toggle="tab">Join game</a></li>
+							  <li><a href="#create" role="tab" data-toggle="tab">Create game</a></li>
+							</ul>
+
+							<!-- Tab panes -->
+							<div class="tab-content">
+
+							<!-- join game -->
+							  <div class="tab-pane active" id="join">
+							  	<div>
+							  		<h4><span class="label label-primary">Game room</span></h4>
+							  	</div>
+
+							  	<div class="col-md-7 col-sm-6 col-xs-9">
+					  		  		<div class="jumbotron" id="game_room" style="overflow-y: scroll;">
+					  					<br><button class="btn btn-primary" id="b1" onclick="join_room()"> <h5> </h5> </button></br>
+					  					<br><button class="btn btn-primary" id="b2" onclick="join_room()"> <h5> </h5> </button></br>
+					  					<br><button class="btn btn-primary" id="b3" onclick="join_room()"> <h5> </h5> </button></br>
+					  					<br><button class="btn btn-primary" id="b4" onclick="join_room()"> <h5> </h5> </button></br>
+					  					<br><button class="btn btn-primary" id="b5" onclick="join_room()"> <h5> </h5> </button></br>
+					  					<br><button class="btn btn-primary" id="b6" onclick="join_room()"> <h5> </h5> </button></br>
+					  					<br><button class="btn btn-primary" id="b7" onclick="join_room()"> <h5> </h5> </button></br>
+					  		  		</div>
+
+					  			</div>
+							  </div>
+
+							  <!-- create game -->
+							  
+							  <div class="tab-pane" id="create">
+							  	<div class="col-md-6 col-sm-6 col-xs-9 col-md-offset2">
+					  				<label></label>
+					  					
+					  		  			<div class="container-fluid">
+					  						<button class="btn btn-primary" onclick="create_room()">Create room <span class="glyphicon glyphicon-hand-left"></span></button>
+					  		 			</div>
+					  		 			
+					  			</div>
+							  </div>
+							  
+
+							</div>
+
+				   		</div>
+				  	</div>
+
+				
+			  </div>
+
+
+			 <!-- profile -->
+			  <div class="tab-pane" id="profile">
+			  	<label></label>
+				<label></label>
+				<form class="form-join" role="form">
+				  <div class="container-fluid">
+				   <div class="col-md-12 col-sm-12">
+					<ul class="nav nav-tabs" role="tablist">
+				  	<li class="active"><a href="#">Profile Player</a></li>
+				  	</ul>
+				  		<div class="col-md-6 col-sm-6 col-xs-9">
+				  		<label></label>
+				  		  <div class="container-fluid">
+				  			
+				  		  </div>
+				  		</div>
+				   </div>
+				  </div>
+				</form>
+			  </div>
+
+
+			 <!-- round -->
+			  <div class="tab-pane" id="round">
+			  	<label></label>
+				<label></label>
+				<form class="form-round" role="form">
+				  <div class="container-fluid">
+				   <div class="col-md-12 col-sm-12">
+					<ul class="nav nav-tabs" role="tablist">
+				  	<li class="active"><a href="#">Round</a></li>
+				  	</ul>
+				  		<div class="col-md-6 col-sm-6 col-xs-9">
+				  		<label></label>
+				  		  <div class="container-fluid">
+				  			<p class="bg-primary">Scoreboard</p>
+				  		  </div>
+				  		</div>
+				   </div>
+				  </div>
+				</form>
+			  </div>
+			  
+
+			</div>
+
+		 
+		</div>
+	</div>
+
+
+
+</body>
+
+<script>
+
+	function join_room(){
+		var request = $.ajax({
+			url: "service/room/create",
+			type: "POST",
+
+		});
+				 
+		request.done(function( msg ) {
+			var obj = JSON.parse(msg);
+			window.location = obj.url;			
+		});
+		 
+		request.fail(function( jqXHR, textStatus ) {
+		  alert( "Request failed: " + textStatus );
+		});
+	}
+
+	function create_room(){
+
+		var request = $.ajax({
+			url: "service/room/create",
+			data: localStorage.username,
+			type: "POST",
+			type: "text"
+		});
+				 
+		request.done(function( msg ) {
+			var obj = JSON.parse(msg);
+			window.location = obj.url;			
+		});
+		 
+		request.fail(function( jqXHR, textStatus ) {
+		  alert( "Request failed: " + textStatus );
+		});
+	}
+
+	function logout(){
+
+		var request = $.ajax({
+			url: "service/member/logout",
+			type: "POST",
+
+		});
+				 
+		request.done(function( msg ) {
+		var obj = JSON.parse(msg);
+
+			// delete session ID
+			window.location = obj.url;			
+		});
+		 
+		request.fail(function( jqXHR, textStatus ) {
+		  alert( "Request failed: " + textStatus );
+		});
+	}
+
+
+	// show game room
+		$( document ).ready( function() {
+			setInterval(function(){ 
+			var getData=$.ajax({ 
+				url:"service/gameUI/lobby",
+				type: "POST",
+				success:function(getData){
+					var obj = JSON.parse(getData);
+					for (var i = 1; i < obj.length; i++) {
+						$( "#b"+i ).html( obj[i].creater + "    " + obj[i].numPlayer + " /6" );
+					};
+					
+				}
+			})
+			},2000);	
+		});
+	
+
+		
+		/*$( document ).ready( function() {
+			var obj = ["room",{"creater":"deknarog","numPlayer":0},{"creater":"deknarogg","numPlayer":0},{"creater":"deknaroggg","numPlayer":0}];
+			for(var i = 1; i < obj.length; i++){
+			 	$( "#b"+i ).html( obj[i].creater + "    " + obj[i].numPlayer + " /6" );
+			};
+		});*/
+</script>
+</html>

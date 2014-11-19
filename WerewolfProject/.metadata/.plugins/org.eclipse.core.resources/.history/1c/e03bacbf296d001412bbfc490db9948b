@@ -1,0 +1,31 @@
+package service;
+
+import model.MemberModel;
+
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
+import org.json.*;
+
+import JDBC.JDBCdataRoom;
+
+@RestController
+@RequestMapping("/play")
+public class PlayController{
+	@RequestMapping("/kill")
+	public String postKill(@RequestParam String username,@RequestParam int roomID){
+		JDBCdataRoom jdbcDateRoom = new JDBCdataRoom();
+		jdbcDateRoom.updateKillPlayer(username, roomID);
+		JSONObject json = new JSONObject();
+		try {
+			json.putOnce("kill", true);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return json+"";
+	}
+}

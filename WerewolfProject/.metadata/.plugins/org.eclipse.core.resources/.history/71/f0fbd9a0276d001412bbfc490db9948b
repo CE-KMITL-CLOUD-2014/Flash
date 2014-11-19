@@ -1,0 +1,81 @@
+package service;
+
+import java.util.ArrayList;
+
+import model.GameRoom;
+import model.Villager;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import JDBC.JDBCdataRoom;
+@RestController
+@RequestMapping(value = "/gameUI")
+public class UIController {
+	
+//	public JSONObject getLobby(){
+	@RequestMapping(value = "/lobby", method = RequestMethod.POST)
+	public String getLobby(){
+		JDBCdataRoom jdbcDataRoom = new JDBCdataRoom();
+		JSONObject json = new JSONObject();
+		JSONArray jsonArray1 = new JSONArray();
+		JSONArray jsonArray2 = new JSONArray();
+		ArrayList<GameRoom> roomlist = jdbcDataRoom.roomlist();
+		int i = 0;
+		String createrRoom = "";
+		String numPlayer = "";
+		jsonArray1.put("creater");
+		jsonArray2.put("numPlayer");
+		for(GameRoom room :roomlist){
+			i++;
+			createrRoom = "creater"+i;
+			numPlayer = "numPlayer"+i;
+			try {
+//				json.put(createrRoom, room.getCreater());
+//				json.put(numPlayer, room.getNumPlayer());
+				jsonArray1.put(i, room.getCreater());
+				jsonArray2.put(i, room.getNumPlayer());
+				//jsonArray.put(i, room.getNumPlayer());
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+		}
+		try {
+			json.put("creater", jsonArray1);
+			json.put("numRoom", jsonArray2);
+		} catch (JSONException e) {
+
+			e.printStackTrace();
+		}
+		return json.toString()+"";
+	}
+	
+	@RequestMapping(value = "/game", method = RequestMethod.GET)
+	public String getGame(@RequestParam("roomID") int roomID){
+		
+		JDBCdataRoom jdbcDataRoom = new JDBCdataRoom();
+		JSONObject json = new JSONObject();
+		GameRoom room = jdbcDataRoom.selectDataInGame(roomID);
+		int i = 0;
+		String username = "";
+		String career = "";
+		String status =""; 
+		String vote ="";
+		String votedPoint = "";
+		for(Villager vi :room.getPlayer()){
+			i++;
+			username = "username"+i;
+			career = "career"+i;
+			status ="status"+i;
+			vote ="vote"+i;
+			votedPoint = "votedPoint"+i;
+		}
+		return ""+json;
+	}
+	
+}

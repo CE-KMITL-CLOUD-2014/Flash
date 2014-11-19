@@ -1,0 +1,20 @@
+package test;
+
+import static org.junit.Assert.*;
+import model.MemberModel;
+
+import org.junit.Test;
+import org.springframework.mock.staticmock.MockStaticEntityMethods;
+
+import service.JoinRoomController;
+
+public class JoinTest {
+
+	@Test
+	public void test() {
+		MemberModel mem = new MemberModel(99, "username", "password");
+		JoinRoomController jr = new JoinRoomController();
+		jr.getCreate("usertest");
+	}
+
+}

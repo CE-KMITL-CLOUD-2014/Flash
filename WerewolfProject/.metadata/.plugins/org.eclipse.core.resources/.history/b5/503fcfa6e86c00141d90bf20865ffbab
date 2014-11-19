@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Werewolf-Game</title>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8 "/>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+<script>
+	function leave(){
+		$("#leave").attr("action","lobby.html");
+		leave.submit();
+	}
+</script>
+
+<script>
+
+function chat(){
+	var $newdiv1 = $( "<div id='object1'/>" ),
+  
+  	existingdiv1 = document.getElementById( "chat_text" ).value;
+ 	var aaa = existingdiv1;
+ 	//var aaa += $(existingdiv1).html(aaa);
+	$( "#responseText" ).html(aaa);
+	
+}
+
+</script>
+
+</head>
+<style>
+body{
+	background-image:url("sunny.jpg")
+}
+
+#ground{
+
+    width: 80%;
+    background-color: white;
+    height: 680px;
+}
+
+#state{
+	background-color: #DCDCDC;
+}
+
+#responseText{
+	background-color: #DCDCDC ;
+	height: 480px;
+	
+}
+
+</style>
+<body>
+
+	<div class="form-ground">
+		<div class="col-md-10 col-sm-10 col-xs-11.5 col-md-offset-1 col-sm-offset-1 col-xs-offset-0.5" id="ground">
+			
+			<!-- button Leave game -->
+			<label></label>
+			<form class="form-leave" id="leave" action="lobby.html">
+				<div class="col-md-3 col-sm-2 col-xs-1 col-md-offset-10 col-sm-offset-9 col-xs-offset-8" id="leave" >
+					  <button type="submit" class="btn btn-default"  ><span class="glyphicon glyphicon-cog"></span>Leave Game</button>
+				</div>
+			</form>
+
+			<!-- State -->
+
+			<div class="col-md-12" id="state">
+				<h4>
+				<center>State : Night</center>
+				</h4>
+			</div>
+
+			<div>
+				<label></label>
+			</div>
+
+			<!-- game -->	
+			<div class="container-fluid">
+				<div class="row">
+					<!-- player -->
+					<div class="col-md-3" id="playerbox">
+						
+					
+					</div>
+
+					<!-- Chat -->
+
+					<div class="col-md-6" id="responseText" style="overflow-y: scroll;" >
+						<div id="object1"><br></br></div>
+					</div>
+
+					<!-- Vote -->
+					<div class="col-md-3" id="">
+					</div>
+				</div>
+			</div>
+
+			<!-- Chat box -->
+			
+				<div  class="col-md-6 col-md-offset-3">
+					<div class="col-md-12" >
+			    		<div class="input-group" >
+		  					<input type="text" id="chat_text" class="form-control" >
+		  					<span class="input-group-btn">
+        						<button class="btn btn-default" onclick="chat()">Enter!</button>
+      						</span>
+						</div>
+			  		</div>
+				</div>
+			
+		</div>
+	
+	</div> 
+</body>
+</html>
