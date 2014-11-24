@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Werewolf-Game</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8 " />
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+</head>
+<style>
+body {
+	background-image: url("night.jpg")
+}
+
+#ground {
+	width: 85%;
+	background-color: white;
+	height: 680px;
+}
+
+#state {
+	background-color: #DCDCDC;
+}
+
+#responseText {
+	background-color: #DCDCDC;
+	height: 510px;
+}
+</style>
+<body>
+
+	<div class="form-ground">
+		<div
+			class="col-md-10 col-sm-10 col-xs-12 col-md-offset-1 col-sm-offset-1 col-xs-offset-1"
+			id="ground">
+
+			<!-- button Leave game -->
+			<label></label>
+			<form class="form-leave" id="leave" action="lobby.html">
+				<div
+					class="col-md-3 col-sm-2 col-xs-3 col-md-offset-10 col-sm-offset-9 col-xs-offset-8"
+					id="leave">
+					<button type="submit" class="btn btn-default">
+						<span class="glyphicon glyphicon-cog"></span>Leave Game
+					</button>
+				</div>
+			</form>
+
+			<!-- State -->
+
+			<div class="col-md-12 col-xs-12" id="state">
+				<center>
+					<h4 id="text">
+
+						<h4>
+				</center>
+			</div>
+
+			<div>
+				<label></label>
+			</div>
+
+			<!-- game -->
+			<div class="container-fluid">
+				<div class="row">
+					<!-- player -->
+					<div class="col-md-3 col-xs-3">
+						<p id="p1"></p>
+						<p id="p2"></p>
+						<p id="p3"></p>
+						<p id="p4"></p>
+						<p id="p5"></p>
+						<p id="p6"></p>
+
+						<div>
+							<button class="btn btn-primary" id="start" onclick="start()">start</button>
+						</div>
+					</div>
+
+					<!-- Chat -->
+
+					<div class="col-md-6 col-xs-6" id="responseText"
+						style="overflow-y: scroll;"></div>
+
+					<!-- Vote -->
+					<div class="col-md-3 col-xs-3">
+
+						<div>
+							<p id="d1"></p>
+							<p id="d2"></p>
+							<p id="d3"></p>
+							<p id="d4"></p>
+							<p id="d5"></p>
+							<p id="d6"></p>
+
+							<!-- vote -->
+							<button id="user" type="button" data-toggle="dropdown"
+								aria-haspopup="true" role="button" aria-expanded="false">
+								vote <span class="caret"></span>
+							</button>
+							<button id="submit" onclick="submit()">submit</button>
+							<ul class="dropdown-menu" id="dropdown" role="menu"
+								aria-labelledby="dLabel">
+								<li role="presentation"><button id="v1"
+										onclick="vote(this)"></button></li>
+								<li role="presentation"><button id="v2"
+										onclick="vote(this)"></button></li>
+								<li role="presentation"><button id="v3"
+										onclick="vote(this)"></button></li>
+								<li role="presentation"><button id="v4"
+										onclick="vote(this)"></button></li>
+								<li role="presentation"><button id="v5"
+										onclick="vote(this)"></button></li>
+								<li role="presentation"><button id="v6"
+										onclick="vote(this)"></button></li>
+							</ul>
+
+							<!-- kill -->
+							<button id="kill" type="button" data-toggle="dropdown"
+								aria-haspopup="true" role="button" aria-expanded="false">
+
+								<span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu" id="dropdown" role="menu"
+								aria-labelledby="dLabel">
+								<li role="presentation"><button id="k1"
+										onclick="kill(this)"></button></li>
+								<li role="presentation"><button id="k2"
+										onclick="kill(this)"></button></li>
+								<li role="presentation"><button id="k3"
+										onclick="kill(this)"></button></li>
+								<li role="presentation"><button id="k4"
+										onclick="kill(this)"></button></li>
+								<li role="presentation"><button id="k5"
+										onclick="kill(this)"></button></li>
+								<li role="presentation"><button id="k6"
+										onclick="kill(this)"></button></li>
+							</ul>
+						</div>
+
+
+					</div>
+				</div>
+			</div>
+
+			<!-- Chat box -->
+
+			<div class="col-md-6 col-md-offset-3 ">
+				<div class="col-md-12 col-xs-12">
+					<div class="input-group">
+						<input id="text_bar" class="form-control" method="post"> <span
+							class="input-group-btn">
+							<button type="submit" class="btn btn-default" onclick="chat()">Enter!</button>
+						</span>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+</body>
+
+<script>
+	//submit
+	function submit() {
+		var request = $.ajax({
+			url : "service/play/submit",
+			type : "POST",
+			data : {
+				username : localStorage.getItem("usernameLocal"),
+				idRoom : localStorage.getItem("idRoom")
+			},
+
+		});
+
+		request.done(function(msg) {
+
+		});
+
+		request.fail(function(jqXHR, textStatus) {
+			alert("Request failed: " + textStatus);
+		});
+	}
+
+	//vote
+	function vote(buttons) {
+		var request = $.ajax({
+			url : "service/play/vote",
+			type : "POST",
+			data : {
+				voter : localStorage.getItem("usernameLocal"),
+				idRoom : localStorage.getItem("idRoom"),
+				voted : $(buttons).html()
+			},
+
+		});
+
+		request.done(function(msg) {
+
+		});
+
+		request.fail(function(jqXHR, textStatus) {
+			alert("Request failed: " + textStatus);
+		});
+	}
+
+	//kill
+	function kill(buttons) {
+		var request = $.ajax({
+			url : "service/play/kill",
+			type : "POST",
+			data : {
+				username : $(buttons).html(),
+				idRoom : localStorage.getItem("idRoom")
+			},
+
+		});
+
+		request.done(function(msg) {
+
+		});
+
+		request.fail(function(jqXHR, textStatus) {
+			alert("Request failed: " + textStatus);
+		});
+	}
+
+	$(document).ready(function() {
+		setInterval(function() {
+			var getData = $.ajax({
+				url : "service/gameUI/chat",
+				type : "POST",
+				data : {
+					idRoom : localStorage.getItem("idRoom")
+				},
+				success : function(getData) {
+					var obj = JSON.parse(getData);
+					var temp = "";
+					for ( var i = 0; i < obj.length; i++) {
+						temp = temp + obj[i] + "<br></br>";
+					}
+					$("#responseText").html(temp);
+
+				}
+			})
+		}, 1000);
+	});
+
+
+	//start
+	function start() {
+		var request = $.ajax({
+			url : "service/play/start",
+			type : "POST",
+			data : {
+				idRoom : localStorage.getItem("idRoom")
+			},
+
+		});
+
+		request.done(function(msg) {
+
+		});
+
+		request.fail(function(jqXHR, textStatus) {
+			alert("Request failed: " + textStatus);
+		});
+	}
+
+	//game 
+	$(document)
+			.ready(
+					function() {
+						setInterval(
+								function() {
+									var getData = $
+											.ajax({
+												url : "service/gameUI/game",
+												type : "POST",
+												data : {
+													idRoom : localStorage
+															.getItem("idRoom")
+												},
+												success : function(getData) {
+													var obj = JSON
+															.parse(getData);
+
+													$("#text")
+															.html(
+																	"State : "
+																			+ obj.state);
+
+													//standby
+													$("#p1")
+															.html(obj.username1);
+													$("#p2")
+															.html(obj.username2);
+													$("#p3")
+															.html(obj.username3);
+													$("#p4")
+															.html(obj.username4);
+													$("#p5")
+															.html(obj.username5);
+													$("#p6")
+															.html(obj.username6);
+
+													//play
+													if (obj.state == "chat"
+															|| obj.state == "vote"
+															|| obj.state == "showvote"
+															|| obj.state == "end"
+															|| obj.state == "kill") {
+
+														//show user & career
+														if (localStorage
+																.getItem("usernameLocal") == obj.username1) {
+															$("#p1")
+																	.html(
+																			obj.username1
+																					+ " is "
+																					+ obj.career1);
+														} else if (localStorage
+																.getItem("usernameLocal") == obj.username2) {
+															$("#p2")
+																	.html(
+																			obj.username2
+																					+ " is "
+																					+ obj.career2);
+														} else if (localStorage
+																.getItem("usernameLocal") == obj.username3) {
+															$("#p3")
+																	.html(
+																			obj.username3
+																					+ " is "
+																					+ obj.career3);
+														} else if (localStorage
+																.getItem("usernameLocal") == obj.username4) {
+															$("#p4")
+																	.html(
+																			obj.username4
+																					+ " is "
+																					+ obj.career4);
+														} else if (localStorage
+																.getItem("usernameLocal") == obj.username5) {
+															$("#p5")
+																	.html(
+																			obj.username5
+																					+ " is "
+																					+ obj.career5);
+														} else if (localStorage
+																.getItem("usernameLocal") == obj.username6) {
+															$("#p6")
+																	.html(
+																			obj.username6
+																					+ " is "
+																					+ obj.career6);
+														}
+
+														//show user & die 
+														if (obj.status1 == "die") {
+															$("#p1")
+																	.html(
+																			obj.username1
+																					+ " : "
+																					+ obj.career1
+																					+ "  Dead");
+														}
+														if (obj.status2 == "die") {
+															$("#p2")
+																	.html(
+																			obj.username2
+																					+ " : "
+																					+ obj.career2
+																					+ "  Dead");
+														}
+														if (obj.status3 == "die") {
+															$("#p3")
+																	.html(
+																			obj.username3
+																					+ " : "
+																					+ obj.career3
+																					+ "  Dead");
+														}
+														if (obj.status4 == "die") {
+															$("#p4")
+																	.html(
+																			obj.username4
+																					+ " : "
+																					+ obj.career4
+																					+ "  Dead");
+														}
+														if (obj.status5 == "die") {
+															$("#p5")
+																	.html(
+																			obj.username5
+																					+ " : "
+																					+ obj.career5
+																					+ "  Dead");
+														}
+														if (obj.status6 == "die") {
+															$("#p6")
+																	.html(
+																			obj.username6
+																					+ " : "
+																					+ obj.career6
+																					+ "  Dead");
+														}
+
+														//user
+														if (obj.status1 == "alive") {
+															$("#v1")
+																	.html(
+																			obj.username1);
+															$("#d1")
+																	.html(
+																			obj.username1);
+														}
+														if (obj.status2 == "alive") {
+															$("#v2")
+																	.html(
+																			obj.username2);
+															$("#d2")
+																	.html(
+																			obj.username2);
+														}
+														if (obj.status3 == "alive") {
+															$("#v3")
+																	.html(
+																			obj.username3);
+															$("#d3")
+																	.html(
+																			obj.username3);
+														}
+														if (obj.status4 == "alive") {
+															$("#v4")
+																	.html(
+																			obj.username4);
+															$("#d4")
+																	.html(
+																			obj.username4);
+														}
+														if (obj.status5 == "alive") {
+															$("#v5")
+																	.html(
+																			obj.username5);
+															$("#d5")
+																	.html(
+																			obj.username5);
+														}
+														if (obj.status6 == "alive") {
+															$("#v6")
+																	.html(
+																			obj.username6);
+															$("#d6")
+																	.html(
+																			obj.username6);
+														}
+
+														//vote
+														if (obj.state == "vote"
+																|| obj.state == "showvote"
+																|| obj.state == "chat") {
+															if (obj.status1 == "alive"
+																	&& obj.vote1 !== "") {
+																$("#d1")
+																		.html(
+																				obj.username1
+																						+ " : vote "
+																						+ obj.vote1);
+															}
+															if (obj.status2 == "alive"
+																	&& obj.vote2 !== "") {
+																$("#d2")
+																		.html(
+																				obj.username2
+																						+ " : vote "
+																						+ obj.vote2);
+															}
+															if (obj.status3 == "alive"
+																	&& obj.vote3 !== "") {
+																$("#d3")
+																		.html(
+																				obj.username3
+																						+ " : vote "
+																						+ obj.vote3);
+															}
+															if (obj.status4 == "alive"
+																	&& obj.vote4 !== "") {
+																$("#d4")
+																		.html(
+																				obj.username4
+																						+ " : vote "
+																						+ obj.vote4);
+															}
+															if (obj.status5 == "alive"
+																	&& obj.vote5 !== "") {
+																$("#d5")
+																		.html(
+																				obj.username5
+																						+ " : vote "
+																						+ obj.vote5);
+															}
+															if (obj.status6 == "alive"
+																	&& obj.vote6 !== "") {
+																$("#d6")
+																		.html(
+																				obj.username6
+																						+ " : vote "
+																						+ obj.vote6);
+															}
+
+														}
+
+														//end
+														if (obj.state == "end") {
+															if (obj.status1 == "alive"
+																	&& obj.career1 == "werewolf") {
+																$("#text")
+																		.html(
+																				"werewolf win !!");
+															} else if (obj.status2 == "alive"
+																	&& obj.career2 == "werewolf") {
+																$("#text")
+																		.html(
+																				"werewolf win !!");
+															} else if (obj.status3 == "alive"
+																	&& obj.career3 == "werewolf") {
+																$("#text")
+																		.html(
+																				"werewolf win !!");
+															} else if (obj.status4 == "alive"
+																	&& obj.career4 == "werewolf") {
+																$("#text")
+																		.html(
+																				"werewolf win !!");
+															} else if (obj.status5 == "alive"
+																	&& obj.career5 == "werewolf") {
+																$("#text")
+																		.html(
+																				"werewolf win !!");
+															} else if (obj.status6 == "alive"
+																	&& obj.career6 == "werewolf") {
+																$("#text")
+																		.html(
+																				"werewolf win !!");
+															} else {
+																$("#text")
+																		.html(
+																				"villager win !!");
+															}
+															if(obj.isEnd)
+																window.location = obj.url;
+														}
+
+													}
+
+													if (obj.state == "kill") {
+
+														if (obj.career1 == "werewolf") {
+															$('#kill').html(
+																	"kill");
+
+															if (obj.status1 == "alive") {
+																$("#k1")
+																		.html(
+																				obj.username1);
+															}
+															if (obj.status2 == "alive") {
+																$("#k2")
+																		.html(
+																				obj.username2);
+															}
+															if (obj.status3 == "alive") {
+																$("#k3")
+																		.html(
+																				obj.username3);
+															}
+															if (obj.status4 == "alive") {
+																$("#k4")
+																		.html(
+																				obj.username4);
+															}
+															if (obj.status5 == "alive") {
+																$("#k5")
+																		.html(
+																				obj.username5);
+															}
+															if (obj.status6 == "alive") {
+																$("#k6")
+																		.html(
+																				obj.username6);
+															}
+
+														} else if (obj.career2 == "werewolf") {
+															$('#kill').html(
+																	"kill");
+
+															if (obj.status1 == "alive") {
+																$("#k1")
+																		.html(
+																				obj.username1);
+															}
+															if (obj.status2 == "alive") {
+																$("#k2")
+																		.html(
+																				obj.username2);
+															}
+															if (obj.status3 == "alive") {
+																$("#k3")
+																		.html(
+																				obj.username3);
+															}
+															if (obj.status4 == "alive") {
+																$("#k4")
+																		.html(
+																				obj.username4);
+															}
+															if (obj.status5 == "alive") {
+																$("#k5")
+																		.html(
+																				obj.username5);
+															}
+															if (obj.status6 == "alive") {
+																$("#k6")
+																		.html(
+																				obj.username6);
+															}
+
+														} else if (obj.career3 == "werewolf") {
+															$('#kill').html(
+																	"kill");
+
+															if (obj.status1 == "alive") {
+																$("#k1")
+																		.html(
+																				obj.username1);
+															}
+															if (obj.status2 == "alive") {
+																$("#k2")
+																		.html(
+																				obj.username2);
+															}
+															if (obj.status3 == "alive") {
+																$("#k3")
+																		.html(
+																				obj.username3);
+															}
+															if (obj.status4 == "alive") {
+																$("#k4")
+																		.html(
+																				obj.username4);
+															}
+															if (obj.status5 == "alive") {
+																$("#k5")
+																		.html(
+																				obj.username5);
+															}
+															if (obj.status6 == "alive") {
+																$("#k6")
+																		.html(
+																				obj.username6);
+															}
+
+														} else if (obj.career4 == "werewolf") {
+															$('#kill').html(
+																	"kill");
+
+															if (obj.status1 == "alive") {
+																$("#k1")
+																		.html(
+																				obj.username1);
+															}
+															if (obj.status2 == "alive") {
+																$("#k2")
+																		.html(
+																				obj.username2);
+															}
+															if (obj.status3 == "alive") {
+																$("#k3")
+																		.html(
+																				obj.username3);
+															}
+															if (obj.status4 == "alive") {
+																$("#k4")
+																		.html(
+																				obj.username4);
+															}
+															if (obj.status5 == "alive") {
+																$("#k5")
+																		.html(
+																				obj.username5);
+															}
+															if (obj.status6 == "alive") {
+																$("#k6")
+																		.html(
+																				obj.username6);
+															}
+
+														} else if (obj.career5 == "werewolf") {
+															$('#kill').html(
+																	"kill");
+
+															if (obj.status1 == "alive") {
+																$("#k1")
+																		.html(
+																				obj.username1);
+															}
+															if (obj.status2 == "alive") {
+																$("#k2")
+																		.html(
+																				obj.username2);
+															}
+															if (obj.status3 == "alive") {
+																$("#k3")
+																		.html(
+																				obj.username3);
+															}
+															if (obj.status4 == "alive") {
+																$("#k4")
+																		.html(
+																				obj.username4);
+															}
+															if (obj.status5 == "alive") {
+																$("#k5")
+																		.html(
+																				obj.username5);
+															}
+															if (obj.status6 == "alive") {
+																$("#k6")
+																		.html(
+																				obj.username6);
+															}
+
+														} else if (obj.career6 == "werewolf") {
+															$('#kill').html(
+																	"kill");
+
+															if (obj.status1 == "alive") {
+																$("#k1")
+																		.html(
+																				obj.username1);
+															}
+															if (obj.status2 == "alive") {
+																$("#k2")
+																		.html(
+																				obj.username2);
+															}
+															if (obj.status3 == "alive") {
+																$("#k3")
+																		.html(
+																				obj.username3);
+															}
+															if (obj.status4 == "alive") {
+																$("#k4")
+																		.html(
+																				obj.username4);
+															}
+															if (obj.status5 == "alive") {
+																$("#k5")
+																		.html(
+																				obj.username5);
+															}
+															if (obj.status6 == "alive") {
+																$("#k6")
+																		.html(
+																				obj.username6);
+															}
+
+														}
+													}
+												}
+											})
+								}, 1000);
+					});
+
+	// $( document ).ready( function() {
+	// 	for(var i = 1; i < 7; i++){
+	// 		$( "#playerbox" ).wrap( "<h4>player"+i+"</h4>" );
+	// 	}
+	// });
+
+	/*
+	$( document ).ready( function() {
+		setInterval(function(){ 
+		var getData=$.ajax({ 
+			url:"service/room/join",
+			type: "POST",
+			success:function(getData){
+				var obj = JSON.parse(getData);
+				for (var i = 1; i < obj.length; i++) {
+					$( "#p"+i ).html( obj[i].username );
+				};
+				
+			}
+		})
+		},2000);	
+	});*/
+
+	function chat() {
+		var request = $.ajax({
+			url : "service/play/chat",
+			type : "POST",
+			data : {
+				chater : localStorage.getItem("usernameLocal"),
+				idRoom : localStorage.getItem("idRoom"),
+				talk : document.getElementById("text_bar").value
+			},
+
+		});
+
+		request.done(function(msg) {
+
+		});
+
+		request.fail(function(jqXHR, textStatus) {
+			alert("Request failed: " + textStatus);
+		});
+
+	}
+</script>
+
+</html>

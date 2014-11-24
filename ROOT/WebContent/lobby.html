@@ -1,0 +1,335 @@
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8 "/>
+	<title>Werewolf-Lobby</title>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+	<script>
+
+	</script>
+</head>
+<style>
+
+#game_room{
+	background-color: #DCDCDC ;
+	height: 450px;
+
+	
+}
+
+
+</style>
+
+<body>
+
+	<label></label>
+	<div class="form-top">
+		<div class="container-fluid">
+		 <div class="row">
+		  <div class="col-md-1 col-sm-2 col-xs-2">
+		  	<img src="game.png">
+		  </div>
+		  <div class="col-md-9 col-sm-7 col-xs-7">
+
+			<ul class="nav nav-pills">
+			  <li class="active"><a href="#lobby" role="tab" data-toggle="tab">Lobby</a></li>
+			  <li><a href="#profile" role="tab" data-toggle="tab">Profile</a></li>
+			  <li><a href="#round" role="tab" data-toggle="tab">Round</a></li>
+
+			  	<!-- username -->
+			  	<div class="col-md-offset-6">
+ 				<button class="btn btn-default" id="user" type="button" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false"><span class="glyphicon glyphicon-user"></span>  
+ 					
+			    <span class="caret"></span>
+				  </button> 
+				  <ul class="dropdown-menu" id="dropdown" role="menu" aria-labelledby="dLabel">
+				  	<form class="form" id="logout" action="home.html">
+				    	<li role="presentation"><button class="btn btn-default"><span class="glyphicon glyphicon-cog" onclick="logout()"></span>Logout</button></li>
+				    </form>
+				  </ul>
+				</div>
+			</ul>
+
+			
+
+		  	</div>
+			</div>
+
+			<div class="tab-content">
+
+
+			<!-- lobby -->
+			  <div class="tab-pane active" id="lobby">
+			 <!--nav -->
+				<label></label>
+				<label></label>
+
+					<div class="container-fluid">
+						<div class="col-md-12 col-sm-12">
+							
+							<ul class="nav nav-tabs" role="tablist">
+							  <li class="active"><a href="#join" role="tab" data-toggle="tab">Join game</a></li>
+							  <li><a href="#create" role="tab" data-toggle="tab">Create game</a></li>
+							</ul>
+
+							<!-- Tab panes -->
+							<div class="tab-content">
+
+							<!-- join game -->
+							  <div class="tab-pane active" id="join">
+							  	<div>
+							  		<h4><span class="label label-primary">Game room</span></h4>
+							  	</div>
+
+							  	<div class="col-md-7 col-sm-6 col-xs-9">
+					  		  		<div class="jumbotron" id="game_room" style="overflow-y: scroll;">
+					  		  			<div class="row">
+						  					<button class="btn btn-primary" id="b1" onclick="join_room(this)">  </button>
+						  					<h5 id="p1"></h5>
+					  					</div>
+
+					  					<div class="row">
+						  					<button class="btn btn-primary" id="b2" onclick="join_room(this)">  </button>
+						  					<h5 id="p2"></h5>
+					  					</div>
+
+						  				<div class="row">
+							  				<button class="btn btn-primary" id="b3" onclick="join_room(this)"> </button>
+							  				<h5 id="p3"></h5>
+						  				</div>
+
+						  				<div class="row">
+						  					<button class="btn btn-primary" id="b4" onclick="join_room(this)">  </button>
+						  					<h5 id="p4"></h5>
+					  					</div>
+					  					<div class="row">
+						  					<button class="btn btn-primary" id="b5" onclick="join_room(this)">  </button>
+						  					<h5 id="p5"></h5>
+					  					</div>
+					  					<div class="row">
+						  					<button class="btn btn-primary" id="b6" onclick="join_room(this)"> </button>
+						  					<h5 id="p6"></h5>
+					  					</div>
+					  					
+					  		  		</div>
+
+					  			</div>
+							  </div>
+
+							  <!-- create game -->
+							  
+							  <div class="tab-pane" id="create">
+							  	<div class="col-md-6 col-sm-6 col-xs-9 col-md-offset2">
+					  				<label></label>
+					  					
+					  		  			<div class="container-fluid">
+					  						<button class="btn btn-primary" onclick="create_room()">Create room <span class="glyphicon glyphicon-hand-left"></span></button>
+					  		 			</div>
+					  		 			
+					  			</div>
+							  </div>
+							  
+
+							</div>
+
+				   		</div>
+				  	</div>
+
+				
+			  </div>
+
+
+			 <!-- profile -->
+			  <div class="tab-pane" id="profile">
+			  	<label></label>
+				<label></label>
+				<form class="form-join" role="form">
+				  <div class="container-fluid">
+				   <div class="col-md-12 col-sm-12">
+					<ul class="nav nav-tabs" role="tablist">
+				  	<li class="active"><a href="#">Profile Player</a></li>
+				  	</ul>
+				  		<div class="col-md-6 col-sm-6 col-xs-9">
+				  		<label></label>
+				  		  <div class="container-fluid">
+				  			
+				  		  </div>
+				  		</div>
+				   </div>
+				  </div>
+				</form>
+			  </div>
+
+
+			 <!-- round -->
+			  <div class="tab-pane" id="round">
+			  	<label></label>
+				<label></label>
+				<form class="form-round" role="form">
+				  <div class="container-fluid">
+				   <div class="col-md-12 col-sm-12">
+					<ul class="nav nav-tabs" role="tablist">
+				  	<li class="active"><a href="#">Round</a></li>
+				  	</ul>
+				  		<div class="col-md-6 col-sm-6 col-xs-9">
+				  		<label></label>
+				  		  <div class="container-fluid ">
+				  			<p class="bg-primary">Scoreboard</p>
+				  			<p id="scoreboard"></p>
+				  			<p id="u1"></p>
+				  			<p id="u2"></p>
+				  			<p id="u3"></p>
+				  			<p id="u4"></p>
+				  			<p id="u5"></p>
+				  			<p id="u6"></p>
+				  			<p id="u7"></p>
+				  			<p id="u8"></p>
+				  			<p id="u9"></p>
+				  			<p id="u10"></p>
+				  			<p id="u11"></p>
+				  			<p id="u12"></p>
+				  			<p id="u13"></p>
+				  			<p id="u14"></p>
+				  			<p id="u15"></p>
+				  			<p id="u16"></p>
+				  			<p id="u17"></p>
+				  			<p id="u18"></p>
+				  			<p id="u19"></p>
+				  			
+				  		  </div>
+				  		</div>
+				   </div>
+				  </div>
+				</form>
+			  </div>
+			  
+
+			</div>
+
+		 
+		</div>
+	</div>
+
+
+
+</body>
+
+<script>
+
+	//scoreboard
+	$( document ).ready( function() {
+			setInterval(function(){ 
+			var getData=$.ajax({ 
+				url:"service/gameUI/scoreboard",
+				type: "POST",
+				data: {username: localStorage.getItem("usernameLocal")},
+				success:function(getData){
+					var obj = JSON.parse(getData);
+					var temp = "";
+					for (var i = 0; i < obj.length; i++) {
+						temp = temp + obj[i] + "<br></br>";
+					};
+					$( "#scoreboard" ).html(temp);
+					
+				}
+			})
+			},1000);	
+		});
+
+
+
+	//username
+	$( document ).ready( function() {
+		$("#user").html(localStorage.getItem("usernameLocal"));
+	});
+
+
+
+	function join_room(buttons){
+		var request = $.ajax({
+			url: "service/room/join",
+			type: "POST",
+			data: {username: localStorage.getItem("usernameLocal"),
+				 	usercreate: $(buttons).html()},
+
+		});
+				 
+		request.done(function( msg ) {
+			var obj = JSON.parse(msg);
+			localStorage.setItem("idRoom", obj.idRoom);
+			window.location = obj.url;			
+		});
+		 
+		request.fail(function( jqXHR, textStatus ) {
+		  alert( "Request failed: " + textStatus );
+		});
+	}
+
+	function create_room(){
+
+		var request = $.ajax({
+			url: "service/room/create",
+			type: "POST",
+			data: {username: localStorage.getItem("usernameLocal")},
+
+		});
+				 
+		request.done(function( msg ) {
+			var obj = JSON.parse(msg);
+			localStorage.setItem("idRoom", obj.idRoom);
+			window.location = obj.url;			
+		});
+		 
+		request.fail(function( jqXHR, textStatus ) {
+		  alert( "Request failed: " + textStatus );
+		});
+	}
+
+	function logout(){
+
+		var request = $.ajax({
+			url: "service/member/logout",
+			type: "POST",
+			data: {username: localStorage.getItem("usernameLocal")},
+
+		});
+				 
+		request.done(function( msg ) {
+		var obj = JSON.parse(msg);
+
+			window.location = obj.url;			
+		});
+		 
+		request.fail(function( jqXHR, textStatus ) {
+		  alert( "Request failed: " + textStatus );
+		});
+	}
+
+
+
+
+		// show game room
+		$( document ).ready( function() {
+			setInterval(function(){ 
+			var getData=$.ajax({ 
+				url:"service/gameUI/lobby",
+				type: "POST",
+				success:function(getData){
+					var obj = JSON.parse(getData);
+					for (var i = 1; i < obj.length; i++) {
+						$( "#b"+i ).html( obj[i].creater );
+			 			$( "#p"+i ).html( "    " + obj[i].numPlayer + " /6" );
+						
+					};
+					
+				}
+			})
+			},1000);	
+		});
+	
+
+		
+</script>
+</html>
