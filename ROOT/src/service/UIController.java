@@ -72,18 +72,22 @@ public class UIController {
 					json.put(username, vi.getUsername());
 				else
 					json.put(username, "");
+
 				if (vi.getCareer() != null)
 					json.put(career, vi.getCareer());
 				else
 					json.put(career, "");
+
 				if (vi.getStatus() != null)
 					json.put(status, vi.getStatus());
 				else
 					json.put(status, "");
+
 				if (vi.getVotedName() != null)
 					json.put(vote, vi.getVotedName());
 				else
 					json.put(vote, "");
+
 				json.put(votedPoint, vi.getVotedPoint());
 
 			} catch (JSONException e) {
@@ -92,17 +96,18 @@ public class UIController {
 		}
 
 		int villagerNum = 5;
-		for (Villager vi : room.getPlayer()) {
-			if (vi.getCareer().equals("werewolf")
-					&& vi.getStatus().equals("die")) {
-				room.setState("end");
-				jdbcDataRoom.updateChangeState(idRoom, "end");
-				winner = "villager";
-				break;
-			} else if (vi.getCareer().equals("villager")
-					&& vi.getStatus().equals("die"))
-				villagerNum--;
-		}
+		if (!(room.getState().equals("standby")))
+			for (Villager vi : room.getPlayer()) {
+				if (vi.getCareer().equals("werewolf")
+						&& vi.getStatus().equals("die")) {
+					room.setState("end");
+					jdbcDataRoom.updateChangeState(idRoom, "end");
+					winner = "villager";
+					break;
+				} else if (vi.getCareer().equals("villager")
+						&& vi.getStatus().equals("die"))
+					villagerNum--;
+			}
 		if (villagerNum == 0) {
 			room.setState("end");
 			jdbcDataRoom.updateChangeState(idRoom, "end");

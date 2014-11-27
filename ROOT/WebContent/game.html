@@ -116,29 +116,24 @@ body {
 										onclick="vote(this)"></button></li>
 							</ul>
 
-							<!-- kill -->
-							<button id="kill" type="button" data-toggle="dropdown"
-								aria-haspopup="true" role="button" aria-expanded="false">
 
-								<span class="caret"></span>
-							</button>
-							<ul class="dropdown-menu" id="dropdown" role="menu"
-								aria-labelledby="dLabel">
-								<li role="presentation"><button id="k1"
-										onclick="kill(this)"></button></li>
-								<li role="presentation"><button id="k2"
-										onclick="kill(this)"></button></li>
-								<li role="presentation"><button id="k3"
-										onclick="kill(this)"></button></li>
-								<li role="presentation"><button id="k4"
-										onclick="kill(this)"></button></li>
-								<li role="presentation"><button id="k5"
-										onclick="kill(this)"></button></li>
-								<li role="presentation"><button id="k6"
-										onclick="kill(this)"></button></li>
-							</ul>
 						</div>
 
+						<!-- kill -->
+						<button id="kill" type="button" data-toggle="dropdown"
+							aria-haspopup="true" role="button" aria-expanded="false">
+
+							<span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" id="dropdown" role="menu"
+							aria-labelledby="dLabel">
+							<li role="presentation"><button id="k1" onclick="kill(this)"></button></li>
+							<li role="presentation"><button id="k2" onclick="kill(this)"></button></li>
+							<li role="presentation"><button id="k3" onclick="kill(this)"></button></li>
+							<li role="presentation"><button id="k4" onclick="kill(this)"></button></li>
+							<li role="presentation"><button id="k5" onclick="kill(this)"></button></li>
+							<li role="presentation"><button id="k6" onclick="kill(this)"></button></li>
+						</ul>
 
 					</div>
 				</div>
@@ -247,7 +242,6 @@ body {
 			})
 		}, 1000);
 	});
-
 
 	//start
 	function start() {
@@ -416,6 +410,10 @@ body {
 															$("#d1")
 																	.html(
 																			obj.username1);
+														} else if (obj.status1 != "alive") {
+															$("#v1").html("");
+															$("#d1").html("");
+
 														}
 														if (obj.status2 == "alive") {
 															$("#v2")
@@ -424,6 +422,10 @@ body {
 															$("#d2")
 																	.html(
 																			obj.username2);
+														}else if (obj.status2 != "alive") {
+															$("#v2").html("");
+															$("#d2").html("");
+
 														}
 														if (obj.status3 == "alive") {
 															$("#v3")
@@ -432,6 +434,10 @@ body {
 															$("#d3")
 																	.html(
 																			obj.username3);
+														}else if (obj.status3 != "alive") {
+															$("#v3").html("");
+															$("#d3").html("");
+
 														}
 														if (obj.status4 == "alive") {
 															$("#v4")
@@ -440,6 +446,10 @@ body {
 															$("#d4")
 																	.html(
 																			obj.username4);
+														}else if (obj.status4 != "alive") {
+															$("#v4").html("");
+															$("#d4").html("");
+
 														}
 														if (obj.status5 == "alive") {
 															$("#v5")
@@ -449,6 +459,11 @@ body {
 																	.html(
 																			obj.username5);
 														}
+														else if (obj.status5 != "alive") {
+															$("#v5").html("");
+															$("#d5").html("");
+
+														}
 														if (obj.status6 == "alive") {
 															$("#v6")
 																	.html(
@@ -456,6 +471,10 @@ body {
 															$("#d6")
 																	.html(
 																			obj.username6);
+														}else if (obj.status6 != "alive") {
+															$("#v6").html("");
+															$("#d6").html("");
+
 														}
 
 														//vote
@@ -550,224 +569,243 @@ body {
 																		.html(
 																				"villager win !!");
 															}
-															if(obj.isEnd)
+															if (obj.isEnd)
 																window.location = obj.url;
 														}
 
-													}
+														if (obj.state == "kill") {
 
-													if (obj.state == "kill") {
+															if (obj.career1 == "werewolf"
+																	&& localStorage
+																			.getItem("usernameLocal") == obj.username1) {
+																$('#kill')
+																		.html(
+																				"kill");
 
-														if (obj.career1 == "werewolf") {
-															$('#kill').html(
-																	"kill");
+																if (obj.status1 == "alive") {
+																	$("#k1")
+																			.html(
+																					obj.username1);
+																}
+																if (obj.status2 == "alive") {
+																	$("#k2")
+																			.html(
+																					obj.username2);
+																}
+																if (obj.status3 == "alive") {
+																	$("#k3")
+																			.html(
+																					obj.username3);
+																}
+																if (obj.status4 == "alive") {
+																	$("#k4")
+																			.html(
+																					obj.username4);
+																}
+																if (obj.status5 == "alive") {
+																	$("#k5")
+																			.html(
+																					obj.username5);
+																}
+																if (obj.status6 == "alive") {
+																	$("#k6")
+																			.html(
+																					obj.username6);
+																}
 
-															if (obj.status1 == "alive") {
-																$("#k1")
+															} else if (obj.career2 == "werewolf"
+																	&& localStorage
+																			.getItem("usernameLocal") == obj.username2) {
+																$('#kill')
 																		.html(
-																				obj.username1);
-															}
-															if (obj.status2 == "alive") {
-																$("#k2")
-																		.html(
-																				obj.username2);
-															}
-															if (obj.status3 == "alive") {
-																$("#k3")
-																		.html(
-																				obj.username3);
-															}
-															if (obj.status4 == "alive") {
-																$("#k4")
-																		.html(
-																				obj.username4);
-															}
-															if (obj.status5 == "alive") {
-																$("#k5")
-																		.html(
-																				obj.username5);
-															}
-															if (obj.status6 == "alive") {
-																$("#k6")
-																		.html(
-																				obj.username6);
-															}
+																				"kill");
 
-														} else if (obj.career2 == "werewolf") {
-															$('#kill').html(
-																	"kill");
+																if (obj.status1 == "alive") {
+																	$("#k1")
+																			.html(
+																					obj.username1);
+																}
+																if (obj.status2 == "alive") {
+																	$("#k2")
+																			.html(
+																					obj.username2);
+																}
+																if (obj.status3 == "alive") {
+																	$("#k3")
+																			.html(
+																					obj.username3);
+																}
+																if (obj.status4 == "alive") {
+																	$("#k4")
+																			.html(
+																					obj.username4);
+																}
+																if (obj.status5 == "alive") {
+																	$("#k5")
+																			.html(
+																					obj.username5);
+																}
+																if (obj.status6 == "alive") {
+																	$("#k6")
+																			.html(
+																					obj.username6);
+																}
 
-															if (obj.status1 == "alive") {
-																$("#k1")
+															} else if (obj.career3 == "werewolf"
+																	&& localStorage
+																			.getItem("usernameLocal") == obj.username3) {
+																$('#kill')
 																		.html(
-																				obj.username1);
-															}
-															if (obj.status2 == "alive") {
-																$("#k2")
-																		.html(
-																				obj.username2);
-															}
-															if (obj.status3 == "alive") {
-																$("#k3")
-																		.html(
-																				obj.username3);
-															}
-															if (obj.status4 == "alive") {
-																$("#k4")
-																		.html(
-																				obj.username4);
-															}
-															if (obj.status5 == "alive") {
-																$("#k5")
-																		.html(
-																				obj.username5);
-															}
-															if (obj.status6 == "alive") {
-																$("#k6")
-																		.html(
-																				obj.username6);
-															}
+																				"kill");
 
-														} else if (obj.career3 == "werewolf") {
-															$('#kill').html(
-																	"kill");
+																if (obj.status1 == "alive") {
+																	$("#k1")
+																			.html(
+																					obj.username1);
+																}
+																if (obj.status2 == "alive") {
+																	$("#k2")
+																			.html(
+																					obj.username2);
+																}
+																if (obj.status3 == "alive") {
+																	$("#k3")
+																			.html(
+																					obj.username3);
+																}
+																if (obj.status4 == "alive") {
+																	$("#k4")
+																			.html(
+																					obj.username4);
+																}
+																if (obj.status5 == "alive") {
+																	$("#k5")
+																			.html(
+																					obj.username5);
+																}
+																if (obj.status6 == "alive") {
+																	$("#k6")
+																			.html(
+																					obj.username6);
+																}
 
-															if (obj.status1 == "alive") {
-																$("#k1")
+															} else if (obj.career4 == "werewolf"
+																	&& localStorage
+																			.getItem("usernameLocal") == obj.username4) {
+																$('#kill')
 																		.html(
-																				obj.username1);
-															}
-															if (obj.status2 == "alive") {
-																$("#k2")
-																		.html(
-																				obj.username2);
-															}
-															if (obj.status3 == "alive") {
-																$("#k3")
-																		.html(
-																				obj.username3);
-															}
-															if (obj.status4 == "alive") {
-																$("#k4")
-																		.html(
-																				obj.username4);
-															}
-															if (obj.status5 == "alive") {
-																$("#k5")
-																		.html(
-																				obj.username5);
-															}
-															if (obj.status6 == "alive") {
-																$("#k6")
-																		.html(
-																				obj.username6);
-															}
+																				"kill");
 
-														} else if (obj.career4 == "werewolf") {
-															$('#kill').html(
-																	"kill");
+																if (obj.status1 == "alive") {
+																	$("#k1")
+																			.html(
+																					obj.username1);
+																}
+																if (obj.status2 == "alive") {
+																	$("#k2")
+																			.html(
+																					obj.username2);
+																}
+																if (obj.status3 == "alive") {
+																	$("#k3")
+																			.html(
+																					obj.username3);
+																}
+																if (obj.status4 == "alive") {
+																	$("#k4")
+																			.html(
+																					obj.username4);
+																}
+																if (obj.status5 == "alive") {
+																	$("#k5")
+																			.html(
+																					obj.username5);
+																}
+																if (obj.status6 == "alive") {
+																	$("#k6")
+																			.html(
+																					obj.username6);
+																}
 
-															if (obj.status1 == "alive") {
-																$("#k1")
+															} else if (obj.career5 == "werewolf"
+																	&& localStorage
+																			.getItem("usernameLocal") == obj.username5) {
+																$('#kill')
 																		.html(
-																				obj.username1);
-															}
-															if (obj.status2 == "alive") {
-																$("#k2")
-																		.html(
-																				obj.username2);
-															}
-															if (obj.status3 == "alive") {
-																$("#k3")
-																		.html(
-																				obj.username3);
-															}
-															if (obj.status4 == "alive") {
-																$("#k4")
-																		.html(
-																				obj.username4);
-															}
-															if (obj.status5 == "alive") {
-																$("#k5")
-																		.html(
-																				obj.username5);
-															}
-															if (obj.status6 == "alive") {
-																$("#k6")
-																		.html(
-																				obj.username6);
-															}
+																				"kill");
 
-														} else if (obj.career5 == "werewolf") {
-															$('#kill').html(
-																	"kill");
+																if (obj.status1 == "alive") {
+																	$("#k1")
+																			.html(
+																					obj.username1);
+																}
+																if (obj.status2 == "alive") {
+																	$("#k2")
+																			.html(
+																					obj.username2);
+																}
+																if (obj.status3 == "alive") {
+																	$("#k3")
+																			.html(
+																					obj.username3);
+																}
+																if (obj.status4 == "alive") {
+																	$("#k4")
+																			.html(
+																					obj.username4);
+																}
+																if (obj.status5 == "alive") {
+																	$("#k5")
+																			.html(
+																					obj.username5);
+																}
+																if (obj.status6 == "alive") {
+																	$("#k6")
+																			.html(
+																					obj.username6);
+																}
 
-															if (obj.status1 == "alive") {
-																$("#k1")
+															} else if (obj.career6 == "werewolf"
+																	&& localStorage
+																			.getItem("usernameLocal") == obj.username6) {
+																$('#kill')
 																		.html(
-																				obj.username1);
-															}
-															if (obj.status2 == "alive") {
-																$("#k2")
-																		.html(
-																				obj.username2);
-															}
-															if (obj.status3 == "alive") {
-																$("#k3")
-																		.html(
-																				obj.username3);
-															}
-															if (obj.status4 == "alive") {
-																$("#k4")
-																		.html(
-																				obj.username4);
-															}
-															if (obj.status5 == "alive") {
-																$("#k5")
-																		.html(
-																				obj.username5);
-															}
-															if (obj.status6 == "alive") {
-																$("#k6")
-																		.html(
-																				obj.username6);
-															}
+																				"kill");
 
-														} else if (obj.career6 == "werewolf") {
-															$('#kill').html(
-																	"kill");
+																if (obj.status1 == "alive") {
+																	$("#k1")
+																			.html(
+																					obj.username1);
+																}
+																if (obj.status2 == "alive") {
+																	$("#k2")
+																			.html(
+																					obj.username2);
+																}
+																if (obj.status3 == "alive") {
+																	$("#k3")
+																			.html(
+																					obj.username3);
+																}
+																if (obj.status4 == "alive") {
+																	$("#k4")
+																			.html(
+																					obj.username4);
+																}
+																if (obj.status5 == "alive") {
+																	$("#k5")
+																			.html(
+																					obj.username5);
+																}
+																if (obj.status6 == "alive") {
+																	$("#k6")
+																			.html(
+																					obj.username6);
+																}
 
-															if (obj.status1 == "alive") {
-																$("#k1")
-																		.html(
-																				obj.username1);
-															}
-															if (obj.status2 == "alive") {
-																$("#k2")
-																		.html(
-																				obj.username2);
-															}
-															if (obj.status3 == "alive") {
-																$("#k3")
-																		.html(
-																				obj.username3);
-															}
-															if (obj.status4 == "alive") {
-																$("#k4")
-																		.html(
-																				obj.username4);
-															}
-															if (obj.status5 == "alive") {
-																$("#k5")
-																		.html(
-																				obj.username5);
-															}
-															if (obj.status6 == "alive") {
-																$("#k6")
-																		.html(
-																				obj.username6);
-															}
+															} else {
 
+															}
 														}
 													}
 												}
